@@ -1,0 +1,80 @@
+The Windows 10 install is a little simpler than on Linux or macOS, but only if you have one version of
+Python installed. If you have both Python 3.6 and Python 2.7 installed then you are on your own as it is
+much too difficult to manage multiple installations. If you have followed the book so far and have only
+Python 3.6, then here’s what you do. First, change to your home directory and confirm you’re running
+the right version of python:
+
+> cd ~
+
+> python
+Python 3 . 6 . 0 ( v3 . 6 . 0 : 4 1 df79263a11 , Dec 23 2016 , 0 8 : 0 6 : 1 2 )
+[MSC v .1900 64 b i t (AMD64) ] on win32
+Type ”help ” , ” copyright ” , ” c r e d i t s ” or ” l i c e n s e ” f o r more information .
+
+>>> q u i t ( )
+
+Then you’ll want to run pip to confirm you have a basic install:
+
+> pip l i s t
+pip ( 9 . 0 . 1 )
+s e t u p t o o l s ( 2 8 . 8 . 0 )
+
+You can safely ignore any deprecation warning, and it’s alright if you have other packages installed.
+Next, you’ll install virtualenv for setting up simple virtual environments for the rest of the book:
+
+> pip i n s t a l l v i r t u a l e n v
+C o l l e c t i n g v i r t u a l e n v
+Using cached v i r t u a l e n v ..15.1.0..py2 . py3..none..any . whl
+I n s t a l l i n g c o l l e c t e d packages : v i r t u a l e n v
+S u c c e s s f u l l y i n s t a l l e d v i r t u a l e n v ..15.1.0
+
+Once you have virtualenv installed you’ll need to make a .venvs directory and fill it with a virtual
+environment:
+
+> mkdir . venve
+
+> v i r t u a l e n v ....system..s i t e..packages . venvs / lpthw
+Using base p r e f i x
+’ c : \ \ u s e r s \ \ zedsh \ \ appdata \ \ l o c a l \ \ programs \ \ python \ \ python36 ’
+New python executable i n
+C : \ Users \ zedshaw \ . venvs \ lpthw \ S c r i p t s \ python . exe
+I n s t a l l i n g setuptools , pip , wheel . . . done .
+
+Those two commands create a .venvs folder for storing different virtual environments and then create
+your first one named lpthw. A virtual environment (virtualenv) is a ”fake” place to install software so
+that you can have different versions of different packages for each project you’re working on. Once you
+have the virtualenv set up you need to activate it:
+
+> . \ . venve \ lpthw \ S c r i p t s \ a c t i v a t e        
+
+'''
+Set-ExecutionPolicy RemoteSigned in PowerShell otherwise error will occur:
+>.\.venve\lpthw\Scripts\activate : File C:\Users\Ruchit\.venve\lpthw\Scripts\activate.ps1 cannot be loaded because
+>running scripts is disabled on this system. For more information, see about_Execution_Policies at
+>https:/go.microsoft.com/fwlink/?LinkID=135170.
+>At line:1 char:1
+>+ .\.venve\lpthw\Scripts\activate
+>+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+     + FullyQualifiedErrorId : UnauthorizedAccess
+
+'''
+
+
+That will run the activate script for PowerShell, which configures the lpthw virtualenv for your current
+shell. Every time you want to use your software for the book you’ll run this command. You’ll notice in
+our next command that there is now a (lpthw) added to the PowerShell prompt showing you which
+virtualenv you’re using. Finally, you just need to install nose for running tests later:
+
+( lpthw ) > pip i n s t a l l nose
+C o l l e c t i n g nose
+Downloading nose..1.3.7..py3..none..any . whl (154kB )
+100% | ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ | 163kB 1 . 2MB/ s
+I n s t a l l i n g c o l l e c t e d packages : nose
+S u c c e s s f u l l y i n s t a l l e d nose..1.3.7
+
+( lpthw ) >
+
+You’ll see that this installs nose, except pip will install it into your .venvs\lpthw virtual environment instead
+of the main system packages directory. This lets you install conflicting versions of Python packages
+for each project you work on without infecting your main system configuration.
